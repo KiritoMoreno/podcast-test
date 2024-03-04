@@ -30,6 +30,13 @@ for item in yaml_data[item]:
     xml_tree.SubElement(item_element, 'itunes:duration').text = item['duration']
     xml_tree.SubElement(item_element, 'pubDate').text = item['published']
    
+   # Enclosure element we are going to need this as a separate item.
+    enclosure = xml_tree.SubElement(item_element, 'enclosure', {
+        url: link_prefix + item[file],
+        type: 'audio/mpeg', # they are going to be MP3 files
+        length: item['length']
+    })
+    
 
 
 
