@@ -14,7 +14,7 @@ link_prefix = yaml_data['link']
 xml_tree.SubElement(channel_element,'title').text = yaml_data['title']
 xml_tree.SubElement(channel_element,'format').text = yaml_data['format']
 xml_tree.SubElement(channel_element,'subtitle').text = yaml_data['subtitle']
-xml_tree.SubElement(channel_element,'itunes:author').text = yaml_data['autor']
+xml_tree.SubElement(channel_element,'itunes:author').text = yaml_data['author']
 xml_tree.SubElement(channel_element,'description').text = yaml_data['description']
 xml_tree.SubElement(channel_element,'itunes:image', {'href' : link_prefix + yaml_data['image']})
 xml_tree.SubElement(channel_element,'language').text = yaml_data['language']
@@ -22,7 +22,7 @@ xml_tree.SubElement(channel_element,'link').text = link_prefix
 # It stores the data in the attribute
 xml_tree.SubElement(channel_element,'itunes:category', {'text' :yaml_data['category']})
 
-for item in yaml_data[item]:
+for item in yaml_data['item']:
     item_element = xml_tree.SubElement(channel_element, 'item')
     xml_tree.SubElement(item_element, 'title').text = item['title']
     xml_tree.SubElement(item_element, 'itunes:author').text = yaml_data['author']
@@ -32,9 +32,9 @@ for item in yaml_data[item]:
    
    # Enclosure element we are going to need this as a separate item.
     enclosure = xml_tree.SubElement(item_element, 'enclosure', {
-        url: link_prefix + item[file],
-        type: 'audio/mpeg', # they are going to be MP3 files
-        length: item['length']
+        'url': link_prefix + item['file'],
+        'type': 'audio/mpeg', # they are going to be MP3 files
+        'length': item['length']
     })
     
 
