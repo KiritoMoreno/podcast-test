@@ -19,9 +19,17 @@ xml_tree.SubElement(channel_element,'description').text = yaml_data['description
 xml_tree.SubElement(channel_element,'itunes:image', {'href' : link_prefix + yaml_data['image']})
 xml_tree.SubElement(channel_element,'language').text = yaml_data['language']
 xml_tree.SubElement(channel_element,'link').text = link_prefix
+# It stores the data in the attribute
+xml_tree.SubElement(channel_element,'itunes:category', {'text' :yaml_data['category']})
 
-
-
+for item in yaml_data[item]:
+    item_element = xml_tree.SubElement(channel_element, 'item')
+    xml_tree.SubElement(item_element, 'title').text = item['title']
+    xml_tree.SubElement(item_element, 'itunes:author').text = yaml_data['author']
+    xml_tree.SubElement(item_element, 'description').text = item['description']
+    xml_tree.SubElement(item_element, 'itunes:duration').text = item['duration']
+    xml_tree.SubElement(item_element, 'pubDate').text = item['published']
+   
 
 
 
